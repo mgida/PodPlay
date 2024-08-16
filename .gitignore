@@ -50,3 +50,6 @@ Thumbs.db
 
 # Git files
 .git/
+
+apikeys.properties
+
