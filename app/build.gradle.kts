@@ -89,7 +89,10 @@ dependencies {
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.okhttp)
-    implementation(libs.retrofit.converter.gson)
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
+    kapt(libs.moshi.codegen)
+    implementation(libs.retrofit.converter.moshi)
     implementation(libs.mock.webserver)
 
     implementation(libs.dagger.hilt)

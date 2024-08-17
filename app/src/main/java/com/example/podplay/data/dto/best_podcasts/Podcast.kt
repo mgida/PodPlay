@@ -1,42 +1,53 @@
 package com.example.podplay.data.dto.best_podcasts
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-data class Podcast(
-    @SerializedName("audio_length_sec")
-    val audioLengthSec: Int,
-    val country: String,
-    val description: String,
-    @SerializedName("earliest_pub_date_ms")
-    val earliestPubDateMs: Long,
-    val email: String,
-    val explicit_content: Boolean,
-    val extra: Extra,
-    @SerializedName("genre_ids")
-    val genreIds: List<Int>,
-    @SerializedName("has_guest_interviews")
-    val hasGuestInterviews: Boolean,
-    @SerializedName("has_sponsors")
-    val hasSponsors: Boolean,
-    val id: String,
-    val image: String,
-    @SerializedName("is_claimed")
-    val is_claimed: Boolean,
-    val itunes_id: Int,
-    val language: String,
-    val latest_episode_id: String,
-    val latest_pub_date_ms: Long,
-    val listen_score: String,
-    val listen_score_global_rank: String,
-    val listennotes_url: String,
-    val looking_for: LookingFor,
-    val publisher: String,
-    val rss: String,
-    val thumbnail: String,
-    val title: String,
-    @SerializedName("total_episodes")
-    val total_episodes: Int,
-    val type: String,
-    val update_frequency_hours: Int,
-    val website: String
+@JsonClass(generateAdapter = true)
+data class PodcastResponse(
+    @Json(name = "audio_length_sec")
+    val audioLengthSec: Int?,
+    val country: String?,
+    val description: String?,
+    @Json(name = "earliest_pub_date_ms")
+    val earliestPubDateMs: Long?,
+    val email: String?,
+    @Json(name = "explicit_content")
+    val explicitContent: Boolean?,
+    val extra: Extra?,
+    @Json(name = "genre_ids")
+    val genreIds: List<Int>?,
+    @Json(name = "has_guest_interviews")
+    val hasGuestInterviews: Boolean?,
+    @Json(name = "has_sponsors")
+    val hasSponsors: Boolean?,
+    val id: String?,
+    val image: String?,
+    @Json(name = "is_claimed")
+    val isClaimed: Boolean?,
+    @Json(name = "itunes_id")
+    val itunesId: Int?,
+    val language: String?,
+    @Json(name = "latest_episode_id")
+    val latestEpisodeId: String?,
+    @Json(name = "latest_pub_date_ms")
+    val latestPubDateMs: Long?,
+    @Json(name = "listen_score")
+    val listenScore: String?,
+    @Json(name = "listen_score_global_rank")
+    val listenScoreGlobalRank: String?,
+    @Json(name = "listennotes_url")
+    val listennotesUrl: String?,
+    @Json(name = "looking_for")
+    val lookingFor: LookingFor?,
+    val publisher: String?,
+    val rss: String?,
+    val thumbnail: String?,
+    val title: String?,
+    @Json(name = "total_episodes")
+    val totalEpisodes: Int?,
+    val type: String?,
+    @Json(name = "update_frequency_hours")
+    val updateFrequencyHours: Int?,
+    val website: String?
 )
