@@ -8,4 +8,5 @@ class PodcastRepoImpl(
 ) : PodcastRepo {
 
     override suspend fun getBestPodcasts() = remoteDataSource.getBestPodcasts()
+    override suspend fun getGenres() = remoteDataSource.getGenres()
 }
