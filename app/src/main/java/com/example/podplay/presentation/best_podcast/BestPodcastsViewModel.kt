@@ -32,7 +32,7 @@ class BestPodcastsViewModel @Inject constructor(
     val genresState: StateFlow<GenresState> = _genresState
 
     init {
-      //  getBestPodcasts()
+        getBestPodcasts()
         getGenres()
     }
 
