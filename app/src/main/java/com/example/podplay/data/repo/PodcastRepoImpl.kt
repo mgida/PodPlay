@@ -9,4 +9,5 @@ class PodcastRepoImpl(
 
     override suspend fun getBestPodcasts() = remoteDataSource.getBestPodcasts()
     override suspend fun getGenres() = remoteDataSource.getGenres()
+    override suspend fun getPodcastDetails(id: String) = remoteDataSource.getPodcastDetails(id = id)
 }
