@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.podplay.presentation.best_podcast.BestPodcastsViewModel
 import com.example.podplay.ui.theme.PodPlayTheme
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -44,17 +45,19 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun HomeContent(modifier: Modifier = Modifier, viewModel: BestPodcastsViewModel = hiltViewModel()) {
 
-    val state = viewModel.bestPodcastsState.collectAsState().value
+    val bestPodCasts = viewModel.bestPodcastsState.collectAsState().value
+    val genresState = viewModel.genresState.collectAsState().value
 
     SideEffect {
-        Timber.d("Podcasts.. $state")
+        Timber.d("Podcasts: $bestPodCasts,, genres: $genresState")
     }
 
     LazyColumn(
         modifier
             .fillMaxSize()
-            .padding(16.dp)) {
-        items(state.data) {
+            .padding(16.dp)
+    ) {
+        items(bestPodCasts.data) {
             Text(text = it.title, style = MaterialTheme.typography.titleMedium, color = Color.Black)
             Spacer(modifier = Modifier.height(8.dp))
         }
