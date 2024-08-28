@@ -19,7 +19,6 @@ class UIPodcastDetailsMapper @Inject constructor(
             thumbnail = input.thumbnail.orEmpty(),
             description = input.description.orEmpty(),
             hasSponsors = input.hasSponsors ?: false,
-            listenScore = input.listenScore ?: 0,
             totalEpisodes = input.totalEpisodes ?: 0,
             listenNotesUrl = input.listennotesUrl.orEmpty(),
             audioLengthSec = input.audioLengthSec ?: 0

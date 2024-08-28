@@ -10,7 +10,6 @@ data class PodcastDetailsModel(
     val thumbnail: String,
     val description: String,
     val hasSponsors: Boolean,
-    val listenScore: Int,
     val totalEpisodes: Int,
     val listenNotesUrl: String,
     val audioLengthSec: Int

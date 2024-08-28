@@ -1,4 +1,4 @@
-package com.example.podplay.presentation.best_podcast
+package com.example.podplay.presentation.home_podcasts.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +8,8 @@ import com.example.podplay.domain.mapper.UIBestPodcastsMapper
 import com.example.podplay.domain.mapper.UIGenresMapper
 import com.example.podplay.domain.use_case.GetBestPodcastsUseCase
 import com.example.podplay.domain.use_case.GetGenresUseCase
-import com.example.podplay.presentation.genres.GenresState
+import com.example.podplay.presentation.home_podcasts.best_podcast.BestPodcastsState
+import com.example.podplay.presentation.home_podcasts.genres.GenresState
 import com.example.podplay.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,7 +46,7 @@ class BestPodcastsViewModel @Inject constructor(
                 }
 
                 is Resource.Error -> {
-                    _bestPodcastsState.value = BestPodcastsState(error = resource.message ?: "")
+                    _bestPodcastsState.value = BestPodcastsState(error = resource.message.orEmpty())
                 }
 
                 is Resource.Success -> {
@@ -68,7 +69,7 @@ class BestPodcastsViewModel @Inject constructor(
                 }
 
                 is Resource.Error -> {
-                    _genresState.value = GenresState(error = resource.message ?: "")
+                    _genresState.value = GenresState(error = resource.message.orEmpty())
                 }
 
                 is Resource.Success -> {
@@ -78,7 +79,6 @@ class BestPodcastsViewModel @Inject constructor(
                         )
                 }
             }
-
         }.launchIn(viewModelScope)
     }
 }

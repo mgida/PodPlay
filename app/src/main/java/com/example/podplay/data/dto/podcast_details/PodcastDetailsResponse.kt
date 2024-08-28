@@ -31,10 +31,6 @@ data class PodcastDetailsResponse(
     val latestEpisodeId: String?,
     @Json(name = "latest_pub_date_ms")
     val latestPubDateMs: Long?,
-    @Json(name = "listen_score")
-    val listenScore: Int?,
-    @Json(name = "listen_score_global_rank")
-    val listenScoreGlobalRank: String?,
     @Json(name = "listennotes_url")
     val listennotesUrl: String?,
     @Json(name = "looking_for")
