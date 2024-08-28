@@ -1,4 +1,4 @@
-package com.example.podplay.presentation.genres
+package com.example.podplay.presentation.home_podcasts.genres
 
 import com.example.podplay.domain.model.genres.GenreModel
 
