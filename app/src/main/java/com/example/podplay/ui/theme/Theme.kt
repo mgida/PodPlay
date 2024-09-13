@@ -37,6 +37,34 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+
+private val lightColors = lightColorScheme(
+    primary = LightPrimary,
+    secondary = LightSecondary,
+    background = LightBackground,
+    surface = LightSurface,
+    error = LightError,
+    onPrimary = LightOnPrimary,
+    onSecondary = LightOnSecondary,
+    onBackground = LightOnBackground,
+    onSurface = LightOnSurface,
+    onError = LightOnError
+)
+
+private val darkColors = darkColorScheme(
+    primary = DarkPrimary,
+    secondary = DarkSecondary,
+    background = DarkBackground,
+    surface = DarkSurface,
+    error = DarkError,
+    onPrimary = DarkOnPrimary,
+    onSecondary = DarkOnSecondary,
+    onBackground = DarkOnBackground,
+    onSurface = DarkOnSurface,
+    onError = DarkOnError
+)
+
+
 @Composable
 fun PodPlayTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -50,8 +78,8 @@ fun PodPlayTheme(
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> darkColors
+        else -> lightColors
     }
     val view = LocalView.current
     if (!view.isInEditMode) {
@@ -64,7 +92,7 @@ fun PodPlayTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = customTypography,
         content = content
     )
 }

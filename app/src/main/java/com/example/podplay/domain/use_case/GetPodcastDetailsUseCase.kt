@@ -15,7 +15,7 @@ class GetPodcastDetailsUseCase @Inject constructor(private val repo: PodcastRepo
             val podcastDetails = repo.getPodcastDetails(podcastId)
             emit(Resource.Success(data = podcastDetails))
         } catch (e: Exception) {
-            emit(Resource.Error(message = e.localizedMessage ?: ""))
+            emit(Resource.Error(message = e.localizedMessage.orEmpty()))
         }
     }
 }

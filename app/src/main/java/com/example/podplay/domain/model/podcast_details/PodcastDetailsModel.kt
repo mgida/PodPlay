@@ -1,5 +1,8 @@
 package com.example.podplay.domain.model.podcast_details
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 data class PodcastDetailsModel(
     val id: String,
     val type: String,
@@ -15,6 +18,7 @@ data class PodcastDetailsModel(
     val audioLengthSec: Int
 )
 
+@Immutable
 data class EpisodeModel(
     val id: String,
     val link: String,
@@ -23,6 +27,6 @@ data class EpisodeModel(
     val title: String,
     val thumbnail: String,
     val description: String,
-    val listennotesUrl: String,
+    val listenNotesUrl: String,
     val audioLengthSec: Int
 )

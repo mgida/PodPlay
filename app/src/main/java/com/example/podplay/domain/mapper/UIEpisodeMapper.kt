@@ -18,7 +18,7 @@ class UIEpisodesMapper @Inject constructor() : IMapper<List<EpisodeResponse>, Li
                     title = episodeResponse.title.orEmpty(),
                     thumbnail = episodeResponse.thumbnail.orEmpty(),
                     description = episodeResponse.description.orEmpty(),
-                    listennotesUrl = episodeResponse.listennotesUrl.orEmpty(),
+                    listenNotesUrl = episodeResponse.listennotesUrl.orEmpty(),
                     audioLengthSec = episodeResponse.audioLengthSec ?: 0
                 )
             )

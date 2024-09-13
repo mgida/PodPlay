@@ -19,13 +19,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.podplay.domain.model.best_podcasts.BestPodcastModel
+import com.example.podplay.domain.model.genres.GenreModel
 import com.example.podplay.presentation.home_podcasts.best_podcast.BestPodcastsState
 import com.example.podplay.presentation.home_podcasts.viewmodel.BestPodcastsViewModel
+import com.example.podplay.ui.theme.PodPlayTheme
+import com.example.podplay.util.ThemePreviews
 import timber.log.Timber
 
 
@@ -42,22 +43,30 @@ fun HomeContent(
         Timber.d("Podcasts: $bestPodCasts,, genres: $genresState")
     }
 
-    BestPodcasts(modifier, bestPodCasts, onNavigateToDetails)
-
+    BestPodcasts(modifier, bestPodCasts, genresState.data, onNavigateToDetails)
 }
 
 @Composable
 private fun BestPodcasts(
     modifier: Modifier,
     bestPodCasts: BestPodcastsState,
+    categories: List<GenreModel>,
     onNavigateToDetails: (podcastId: String) -> Unit
 ) {
     LazyColumn(
         modifier
             .fillMaxSize()
-            .background(Color.Gray)
+            .background(MaterialTheme.colorScheme.surface)
             .padding(horizontal = 8.dp, vertical = 16.dp)
     ) {
+
+        item {
+            Categories(categories = categories)
+        }
+        item {
+            Spacer(modifier = Modifier.height(12.dp))
+        }
+
         items(bestPodCasts.data) { bestPodCast ->
             BestPodcastItem(modifier = Modifier.clickable {
                 onNavigateToDetails.invoke(bestPodCast.id)
@@ -67,7 +76,38 @@ private fun BestPodcasts(
     }
 }
 
-@Preview
+@Composable
+private fun BestPodcastItem(modifier: Modifier = Modifier, bestPodcastModel: BestPodcastModel) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .background(MaterialTheme.colorScheme.primaryContainer),
+        contentAlignment = Alignment.CenterStart
+    ) {
+        Text(
+            modifier = modifier.padding(16.dp),
+            text = bestPodcastModel.title,
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.primary
+        )
+    }
+}
+
+@ThemePreviews
+@Composable
+fun BestPodcastItemPreview() {
+
+    PodPlayTheme {
+        BestPodcastItem(
+            bestPodcastModel = BestPodcastModel(
+                id = "", image = "", title = "Tech"
+            )
+        )
+    }
+}
+
+@ThemePreviews
 @Composable
 fun BestPodcastsPreview() {
 
@@ -79,39 +119,16 @@ fun BestPodcastsPreview() {
         )
     }
 
-    BestPodcasts(
-        modifier = Modifier.fillMaxSize(),
-        bestPodCasts = BestPodcastsState(
-            data = dummyPodcasts
-        )
-    ) {}
-}
-
-@Composable
-private fun BestPodcastItem(modifier: Modifier = Modifier, bestPodcastModel: BestPodcastModel) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
-            .background(Color.White),
-        contentAlignment = Alignment.CenterStart
-    ) {
-        Text(
-            modifier = modifier.padding(16.dp),
-            text = bestPodcastModel.title,
-            style = MaterialTheme.typography.titleMedium,
-            color = Color.Black
-        )
+    PodPlayTheme {
+        BestPodcasts(
+            modifier = Modifier.fillMaxSize(),
+            bestPodCasts = BestPodcastsState(
+                data = dummyPodcasts
+            ),
+            categories = listOf(
+                GenreModel(id = 1, name = "Ward Dean"),
+                GenreModel(id = 2, name = "Ward Dean"),
+            )
+        ) {}
     }
-}
-
-@Preview
-@Composable
-fun BestPodcastItemPreview() {
-
-    BestPodcastItem(
-        bestPodcastModel = BestPodcastModel(
-            id = "", image = "", title = "Tech"
-        )
-    )
 }

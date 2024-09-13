@@ -15,7 +15,7 @@ class GetGenresUseCase @Inject constructor(private val repo: PodcastRepo) {
             val genres = repo.getGenres()
             emit(Resource.Success(data = genres))
         } catch (e: Exception) {
-            emit(Resource.Error(message = e.localizedMessage ?: ""))
+            emit(Resource.Error(message = e.localizedMessage.orEmpty()))
         }
     }
 }

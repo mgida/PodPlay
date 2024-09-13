@@ -15,7 +15,7 @@ class GetBestPodcastsUseCase @Inject constructor(private val repo: PodcastRepo) 
             val bestPodcasts = repo.getBestPodcasts()
             emit(Resource.Success(data = bestPodcasts))
         } catch (e: Exception) {
-            emit(Resource.Error(message = e.localizedMessage ?: ""))
+            emit(Resource.Error(message = e.localizedMessage.orEmpty()))
         }
     }
 }
