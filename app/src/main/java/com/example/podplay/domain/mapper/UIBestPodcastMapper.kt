@@ -9,7 +9,8 @@ class UIBestPodcastMapper @Inject constructor() : IMapper<PodcastResponse, BestP
         return BestPodcastModel(
             id = input.id ?: "",
             title = input.title ?: "",
-            image = input.image ?: ""
+            image = input.image ?: "",
+            description = input.description.orEmpty()
         )
     }
 }

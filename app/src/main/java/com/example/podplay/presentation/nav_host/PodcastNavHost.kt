@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.podplay.presentation.category.components.CategoryScreen
 import com.example.podplay.presentation.home_podcasts.components.HomeContent
 import com.example.podplay.presentation.podcast_details.components.PodcastDetails
 import com.example.podplay.util.Screen
@@ -25,9 +26,11 @@ fun PodcastNavHost(
         composable(
             route = Screen.HomePodcasts.route,
         ) {
-            HomeContent(modifier = Modifier.fillMaxSize()) { podcastId ->
+            HomeContent(modifier = Modifier.fillMaxSize(), onNavigateToDetails = { podcastId ->
                 navigateToDetailsScreen(navController, podcastId)
-            }
+            }, onNavigateToCategory = { categoryId ->
+                navigateToCategoryScreen(navController, categoryId)
+            })
         }
 
         composable(
@@ -36,6 +39,20 @@ fun PodcastNavHost(
         ) {
             PodcastDetails(modifier = Modifier.fillMaxSize())
         }
+
+        composable(
+            route = Screen.Category.routeWithArgs,
+            arguments = Screen.Category.navArgument
+        ) {
+            CategoryScreen(modifier = Modifier.fillMaxSize())
+        }
+    }
+}
+
+fun navigateToCategoryScreen(navController: NavHostController, categoryId: Int) {
+    navController.navigate(Screen.Category.createRoute(categoryId = categoryId.toString())) {
+        launchSingleTop = true
+        restoreState = true
     }
 }
 

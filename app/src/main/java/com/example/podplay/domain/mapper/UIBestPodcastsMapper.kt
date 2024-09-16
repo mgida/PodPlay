@@ -13,7 +13,8 @@ class UIBestPodcastsMapper @Inject constructor() :
                 BestPodcastModel(
                     id = podcastResponse.id ?: "",
                     title = podcastResponse.title ?: "",
-                    image = podcastResponse.image ?: ""
+                    image = podcastResponse.image ?: "",
+                    description = podcastResponse.description.orEmpty()
                 )
             )
         }

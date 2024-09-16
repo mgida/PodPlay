@@ -1,6 +1,7 @@
 package com.example.podplay.presentation.home_podcasts.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,7 +22,11 @@ import com.example.podplay.util.ThemePreviews
 
 
 @Composable
-fun CategoryItem(modifier: Modifier = Modifier, categoryName: String) {
+fun CategoryItem(
+    modifier: Modifier = Modifier,
+    genreModel: GenreModel,
+    onCategoryClicked: (id: Int) -> Unit
+) {
 
     Box(
         contentAlignment = Alignment.Center,
@@ -30,21 +35,27 @@ fun CategoryItem(modifier: Modifier = Modifier, categoryName: String) {
             .padding(horizontal = 8.dp, vertical = 8.dp)
             .clip(CircleShape)
             .background(MaterialTheme.colorScheme.onBackground)
+            .clickable {
+                onCategoryClicked.invoke(genreModel.id)
+            }
     ) {
 
         Text(
-            text = categoryName,
+            text = genreModel.name,
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(vertical = 12.dp, horizontal = 16.dp)
         )
     }
-
 }
 
 
 @Composable
-fun Categories(modifier: Modifier = Modifier, categories: List<GenreModel>) {
+fun Categories(
+    modifier: Modifier = Modifier,
+    categories: List<GenreModel>,
+    onCategoryClicked: (id: Int) -> Unit
+) {
 
     LazyRow(
         modifier = modifier
@@ -54,7 +65,7 @@ fun Categories(modifier: Modifier = Modifier, categories: List<GenreModel>) {
         items(categories, key = {
             it.id
         }) {
-            CategoryItem(categoryName = it.name)
+            CategoryItem(genreModel = it, onCategoryClicked = onCategoryClicked)
         }
     }
 }
@@ -63,8 +74,10 @@ fun Categories(modifier: Modifier = Modifier, categories: List<GenreModel>) {
 @Composable
 private fun CategoryItemPreview() {
     PodPlayTheme {
-        CategoryItem(
-            categoryName = "Tech"
+        CategoryItem(genreModel = GenreModel(
+            id = 7638,
+            name = "Tech"
+        ), onCategoryClicked = {}
         )
     }
 }
@@ -75,9 +88,9 @@ private fun CategoriesPreview() {
     PodPlayTheme {
         Categories(
             categories = listOf(
-                GenreModel(id = 1, name = "Lon Larsen"),
-                GenreModel(id = 2, name = "Lon Larsen")
+                GenreModel(id = 1, name = "Tech"),
+                GenreModel(id = 2, name = "Science"),
             )
-        )
+        ) {}
     }
 }

@@ -6,5 +6,6 @@ import androidx.compose.runtime.Immutable
 data class BestPodcastModel(
     val id: String,
     val image: String,
-    val title: String
+    val title: String,
+    val description: String
 )

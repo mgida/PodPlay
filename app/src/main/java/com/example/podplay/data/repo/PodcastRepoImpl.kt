@@ -7,7 +7,7 @@ class PodcastRepoImpl(
     val remoteDataSource: PodcastRemoteDataSource
 ) : PodcastRepo {
 
-    override suspend fun getBestPodcasts() = remoteDataSource.getBestPodcasts()
-    override suspend fun getGenres() = remoteDataSource.getGenres()
-    override suspend fun getPodcastDetails(id: String) = remoteDataSource.getPodcastDetails(id = id)
+    override suspend fun getBestPodcasts(genreId:String) = remoteDataSource.getBestPodcasts(genreId)
+    override suspend fun getGenres(topLevel:Int) = remoteDataSource.getGenres(topLevel)
+    override suspend fun getPodcastDetails(id: String, sort:String) = remoteDataSource.getPodcastDetails(id = id, sortBy = sort)
 }
